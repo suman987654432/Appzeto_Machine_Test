@@ -1,8 +1,6 @@
 const Vendor = require('../models/Vendor.js');
 
-// @desc    Get current vendor profile
-// @route   GET /api/vendor/me
-// @access  Private/Vendor
+
 const getVendorProfile = async (req, res) => {
     const vendor = await Vendor.findOne({ userId: req.user._id });
     if (vendor) {
@@ -12,9 +10,7 @@ const getVendorProfile = async (req, res) => {
     }
 };
 
-// @desc    Update vendor profile
-// @route   PUT /api/vendor/profile
-// @access  Private/Vendor
+
 const updateVendorProfile = async (req, res) => {
     const vendor = await Vendor.findOne({ userId: req.user._id });
 

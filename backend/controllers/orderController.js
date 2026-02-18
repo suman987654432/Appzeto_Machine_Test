@@ -3,12 +3,10 @@ const Product = require('../models/Product.js');
 const Vendor = require('../models/Vendor.js');
 const { calculateCommission } = require('../utils/commissionCalculator.js');
 
-// @desc    Create new order
-// @route   POST /api/orders
-// @access  Private
+
 const addOrderItems = async (req, res) => {
     try {
-        const { orderItems, totalAmount } = req.body; // orderItems: [{ productId, quantity }]
+        const { orderItems, totalAmount } = req.body; 
 
         console.log('Creating order for user:', req.user._id);
         console.log('Order data:', { orderItems, totalAmount });
@@ -17,9 +15,6 @@ const addOrderItems = async (req, res) => {
             return res.status(400).json({ message: 'No order items' });
         }
 
-        // 1. Validate stock and calculate detailed items with vendorId
-        // For simplicity, assuming validation is done or simplified here.
-        // We need to fetch products to get prices and vendorIds and check stock.
 
         let orderProducts = [];
         let calculatedTotal = 0;

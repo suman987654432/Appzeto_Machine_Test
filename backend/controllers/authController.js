@@ -11,9 +11,7 @@ const generateToken = (id) => {
     });
 };
 
-// @desc    Register new user
-// @route   POST /api/auth/register
-// @access  Public
+
 const registerUser = async (req, res) => {
     const { name, email, password, role, shopName, description } = req.body;
 
@@ -32,7 +30,7 @@ const registerUser = async (req, res) => {
     const user = await User.create({
         name,
         email,
-        password, // Hashed in model pre-save hook
+        password, 
         role: role || 'buyer' // Default to buyer if not specified or invalid? Enforce enum in model
     });
 
@@ -41,10 +39,7 @@ const registerUser = async (req, res) => {
         let vendorInfo = null;
         if (role === 'vendor') {
             if (!shopName || !description) {
-                // If shop details missing for vendor, maybe fail or require separate step?
-                // For simplicity, let's require them in registration here or separate step.
-                // But if they fail here user is created but vendor isn't.
-                // Let's assume frontend sends all if role is vendor.
+                
                 await User.findByIdAndDelete(user._id); // Rollback
                 return res.status(400).json({ message: 'Please include shop name and description for vendor' });
             }
@@ -68,10 +63,6 @@ const registerUser = async (req, res) => {
         res.status(400).json({ message: 'Invalid user data' });
     }
 };
-
-// @desc    Authenticate a user
-// @route   POST /api/auth/login
-// @access  Public
 const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
@@ -98,9 +89,6 @@ const loginUser = async (req, res) => {
     }
 };
 
-// @desc    Get user data
-// @route   GET /api/auth/me
-// @access  Private
 const getMe = async (req, res) => {
     let vendorId = null;
     if (req.user.role === 'vendor') {

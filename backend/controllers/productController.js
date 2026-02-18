@@ -1,9 +1,6 @@
 const Product = require('../models/Product.js');
 const Vendor = require('../models/Vendor.js');
 
-// @desc    Get all products
-// @route   GET /api/products
-// @access  Public
 const getProducts = async (req, res) => {
     try {
         console.log('=== getProducts Controller ===');
@@ -40,9 +37,7 @@ const getProducts = async (req, res) => {
     }
 };
 
-// @desc    Get single product
-// @route   GET /api/products/:id
-// @access  Public
+
 const getProductById = async (req, res) => {
     const product = await Product.findById(req.params.id);
 
@@ -53,9 +48,6 @@ const getProductById = async (req, res) => {
     }
 };
 
-// @desc    Create a product
-// @route   POST /api/products
-// @access  Private/Vendor
 const createProduct = async (req, res) => {
     try {
         console.log('=== createProduct Controller ===');
@@ -115,9 +107,7 @@ const createProduct = async (req, res) => {
     }
 };
 
-// @desc    Update a product
-// @route   PUT /api/products/:id
-// @access  Private/Vendor
+
 const updateProduct = async (req, res) => {
     const { name, price, stock, image, category } = req.body;
 
@@ -143,9 +133,7 @@ const updateProduct = async (req, res) => {
     }
 };
 
-// @desc    Delete a product
-// @route   DELETE /api/products/:id
-// @access  Private/Vendor
+
 const deleteProduct = async (req, res) => {
     const product = await Product.findById(req.params.id);
     const vendor = await Vendor.findOne({ userId: req.user._id });
