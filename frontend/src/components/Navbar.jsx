@@ -21,7 +21,7 @@ const Navbar = () => {
     return (
         <header className="bg-white shadow p-4">
             <div className="container mx-auto flex justify-between items-center">
-                <Link to="/" className="text-2xl font-bold text-blue-600">MarketPlace</Link>
+                <Link to="/login" className="text-2xl font-bold text-blue-600">MarketPlace</Link>
 
                 <nav className="flex items-center space-x-6">
                     <Link to="/" className="text-gray-600 hover:text-blue-500">Home</Link>
